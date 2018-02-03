@@ -19,7 +19,7 @@ class MusicLinkList
 
   def build_music_links
     json = MyFreeMp3.send_request(@title)
-    result_number = json[0]
+    result_number = json.length
     if result_number == 0
       list = nil
     else

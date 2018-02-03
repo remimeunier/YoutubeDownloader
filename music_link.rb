@@ -4,23 +4,23 @@ class MusicLink
   attr_reader :aid, :owner_id, :artist, :title, :duration, :download_link
 
   def initialize(args)
-    @aid           = parse_aid(args.fetch(:json, ''))
-    @owner_id      = parse_owner_id(args.fetch(:json, ''))
-    @artist        = parse_artist(args.fetch(:json, ''))
-    @title         = parse_title(args.fetch(:json, ''))
-    @duration      = parse_duration(args.fetch(:json, ''))
-    @download_link = "https://streams.my-free-mp3.net/" + Decoder.decode(@owner_id) + ":" + Decoder.decode(@aid)
+    json           = args.fetch(:json, '')
+    @id            = parse_id(json)
+    @owner_id      = parse_owner_id(json)
+    @artist        = parse_artist(json)
+    @title         = parse_title(json)
+    @duration      = parse_duration(json)
+    @download_link = "https://streams.my-free-mp3.net/" + Decoder.decode(@owner_id) + ":" + Decoder.decode(@id)
   end
 
   def to_s
     "#{@artist} - #{@title} : #{@download_link}"
   end
 
-
   private
 
-  def parse_aid(json)
-    json['aid']
+  def parse_id(json)
+    json['id']
   end
   def parse_owner_id(json)
     json['owner_id']

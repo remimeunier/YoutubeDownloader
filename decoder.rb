@@ -4,6 +4,10 @@ class Decoder
   def self.decode(input)
     length  = DECODER_MAP.length
     encoded = ""
+    if input < 0
+      input    = input * -1
+      encoded += '-'
+    end
       while input > 0 do
         val      = (input % length)
         input    = (input / length)
